@@ -107,6 +107,35 @@ body {
   cursor: pointer;
 }
 
+/* ── How It Works ────────────────────────────────────────────── */
+.steps-row {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  width: 100%;
+}
+
+.step-card {
+  flex: 1;
+}
+
+.step-connector {
+  width: 1px;
+  background: rgba(255, 255, 255, 0.06);
+  flex-shrink: 0;
+  margin: 32px 0;
+}
+
+@media (max-width: 767px) {
+  .steps-row {
+    flex-direction: column;
+    gap: 16px;
+  }
+  .step-connector {
+    display: none;
+  }
+}
+
 /* ── Navbar Responsive ───────────────────────────────────────── */
 .navbar-hamburger {
   display: none;

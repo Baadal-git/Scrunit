@@ -31,10 +31,20 @@ Build the Scrutin brand (startup idea validation SaaS) using React + CRA + JavaS
 - Validation: idea + email required, inline error on empty submit
 - NOTE: Form submission is MOCKED (1800ms setTimeout, no real API call)
 
+## Phase 3 — Implemented (2026-03-27)
+### HowItWorks Component (`src/components/HowItWorks.js`)
+- Eyebrow "THE PROCESS" in --accent-orange, Inter 11px uppercase
+- H2 "From idea to insight in minutes." — Instrument Serif, clamp(36px,5vw,56px), letter-spacing -1.5px
+- Subtext — Inter 16px muted
+- 3 step cards in horizontal flex row (.glass-card), stacks vertically on mobile via `.steps-row` CSS class
+- Each card: orange step number (01/02/03), 28px icon, Instrument Serif title, Inter body
+- Vertical 1px connector lines between cards (rgba(255,255,255,0.06)), hidden on mobile
+- Sources callout: "Sources we scrape:" label + 6 pills (Reddit, Product Hunt, Google, G2, Trustpilot, + many more)
+- Added `.steps-row`, `.step-card`, `.step-connector` CSS classes to index.css
+
 ## Prioritized Backlog
 
 ### P0 — Core Pages
-- How It Works section
 - Sample Report page (mock data)
 - Pricing section
 
