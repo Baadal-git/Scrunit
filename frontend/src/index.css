@@ -4,13 +4,14 @@
 
 /* ── Scrutin Design Tokens ─────────────────────────────────── */
 :root {
-  --bg-primary: #0a0a08;
+  --bg-primary: #120f0a;
   --bg-surface: rgba(255, 255, 255, 0.04);
   --text-primary: #ffffff;
   --text-muted: rgba(255, 255, 255, 0.45);
   --border-subtle: rgba(255, 255, 255, 0.08);
   --border-glass: rgba(255, 255, 255, 0.12);
   --accent-white: #ffffff;
+  --accent-orange: #c8622a;
   --font-display: 'Instrument Serif', serif;
   --font-body: 'Inter', sans-serif;
 }
@@ -55,7 +56,7 @@ body {
 
 .btn-primary {
   background: #ffffff;
-  color: #0a0a08;
+  color: var(--bg-primary);
   border: none;
   border-radius: 100px;
   font-family: var(--font-body);
@@ -69,6 +70,40 @@ body {
 .btn-primary:hover {
   transform: scale(1.03);
   box-shadow: 0 4px 24px rgba(255, 255, 255, 0.2);
+}
+
+/* ── Hero Form Inputs ────────────────────────────────────────── */
+.hero-input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-glass);
+  border-radius: 12px;
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 14px;
+  padding: 12px 16px;
+  outline: none;
+  resize: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+}
+
+.hero-input::placeholder {
+  color: var(--text-muted);
+}
+
+.hero-input:focus {
+  border-color: rgba(255, 255, 255, 0.28);
+}
+
+.hero-select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='rgba(255,255,255,0.4)' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+  cursor: pointer;
 }
 
 /* ── Navbar Responsive ───────────────────────────────────────── */
