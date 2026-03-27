@@ -273,9 +273,9 @@ function ConfirmationCard({ email }) {
       <h2
         data-testid="confirmation-heading"
         style={{
-          fontFamily: "var(--font-display)",
+          fontFamily: "var(--font-heading)",
           fontSize: "28px",
-          fontWeight: "normal",
+          fontWeight: 700,
           color: "var(--text-primary)",
           margin: 0,
           letterSpacing: "-0.5px",

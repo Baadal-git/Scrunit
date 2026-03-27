@@ -13,7 +13,8 @@
   --accent-white: #ffffff;
   --accent-orange: #c8622a;
   --font-display: 'Instrument Serif', serif;
-  --font-body: 'Instrument Serif', serif;
+  --font-body: 'Inter', sans-serif;
+  --font-heading: 'Plus Jakarta Sans', sans-serif;
 }
 
 body {
@@ -41,7 +42,7 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 100px;
   color: #ffffff;
-  font-family: var(--font-body);
+  font-family: var(--font-heading);
   font-size: 13px;
   cursor: pointer;
   transition: transform 0.2s;
@@ -59,7 +60,7 @@ body {
   color: var(--bg-primary);
   border: none;
   border-radius: 100px;
-  font-family: var(--font-body);
+  font-family: var(--font-heading);
   font-weight: 600;
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s;
