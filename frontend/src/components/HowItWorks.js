@@ -94,7 +94,7 @@ export default function HowItWorks() {
         <div data-testid="steps-row" className="steps-row">
           {STEPS.map((step, i) => (
             <React.Fragment key={step.number}>
-              <div className="glass-card step-card" style={{ padding: "32px" }}>
+              <div className="glass-card step-card" style={{ padding: "32px", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center" }}>
                 <p
                   style={{
                     fontFamily: "var(--font-body)",
