@@ -19,17 +19,6 @@ function App() {
             animationDelay: "0s",
           }}
         />
-        <div
-          className="bg-glow-orb"
-          style={{
-            width: "420px",
-            height: "420px",
-            background: "#7a3010",
-            top: "55%",
-            right: "-8%",
-            animationDelay: "4.5s",
-          }}
-        />
       </div>
       <div style={{ position: "relative", zIndex: 1 }}>
         <Navbar />
