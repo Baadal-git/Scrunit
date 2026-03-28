@@ -312,7 +312,7 @@ function ConfirmationCard() {
         style={{
           fontFamily: "var(--font-heading)",
           fontSize: "28px",
-          fontWeight: 700,
+          fontWeight: "normal",
           color: "var(--text-primary)",
           margin: 0,
           letterSpacing: "-0.5px",
@@ -320,6 +320,29 @@ function ConfirmationCard() {
       >
         Agents deployed.
       </h2>
+          <div style={{ display: "flex", flexDirection: "column", gap: "10px", margin: "24px 0", width: "100%" }}>
+          {[
+            { icon: "🔍", text: "Scraping Reddit for real user pain points...", delay: "0.3s" },
+            { icon: "📊", text: "Analyzing competitor landscape on Google...", delay: "1.2s" },
+            { icon: "🧠", text: "Claude is generating your report...", delay: "2.4s" },
+          ].map((item, i) => (
+            <div key={i} style={{
+              display: "flex", alignItems: "center", gap: "10px",
+              background: "rgba(255,255,255,0.04)",
+              border: "1px solid rgba(255,255,255,0.08)",
+              borderRadius: "100px", padding: "10px 16px",
+              fontSize: "13px", color: "rgba(255,255,255,0.5)",
+              animation: `fadeRise 0.8s ease-out ${item.delay} both`
+            }}>
+              <span style={{
+                width: "6px", height: "6px", borderRadius: "50%",
+                background: "#c8622a", display: "inline-block",
+                animation: `pulse 1.5s ease-in-out ${i * 0.5}s infinite`
+              }} />
+              {item.icon} {item.text}
+            </div>
+          ))}
+        </div>
       <p
         data-testid="confirmation-body"
         style={{
