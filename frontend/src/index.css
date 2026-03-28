@@ -175,6 +175,24 @@ body::-webkit-scrollbar {
   }
 }
 
+/* ── Pricing ─────────────────────────────────────────────────── */
+.pricing-row {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  align-items: stretch;
+}
+
+.pricing-card {
+  flex: 1;
+}
+
+@media (max-width: 640px) {
+  .pricing-row {
+    flex-direction: column;
+  }
+}
+
 /* ── Score Grid ──────────────────────────────────────────────── */
 .score-grid {
   display: grid;

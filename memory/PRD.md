@@ -50,16 +50,21 @@ Build the Scrutin brand (startup idea validation SaaS) using React + CRA + JavaS
 - CTA row: "Validate My Idea Free →" button scrolls to hero form via `querySelector`
 - Added `.score-grid` CSS class (responsive 3→2 cols) and `html { scroll-behavior: smooth }` to index.css
 
+## Phase 5 — Implemented (2026-03-28)
+### Pricing Component (`src/components/Pricing.js`)
+- Eyebrow "PRICING" → H2 "Simple, honest pricing." → Inter subtext
+- **Free card** (.glass-card): ₹0, 5 features with `→` prefix, "Get My Free Report" .btn-glass CTA
+- **Pro card** (orange-tinted border): ₹999/month, "MOST POPULAR" absolute badge, 5 features, "Start Pro" .btn-primary CTA
+- Both CTAs scroll to hero form; note below cards
+- Added `.pricing-row` / `.pricing-card` responsive CSS (stacks on mobile <640px)
+
 ## Prioritized Backlog
 
-### P0 — Core Pages
-- Pricing section
-
-### P1 — Features
+### P0 — Features
 - Real idea validation API (connect form to backend)
 - Email delivery integration (SendGrid / Resend)
 
-### P2 — Polish
-- Page transitions / animations
-- SEO meta tags
+### P1 — Polish
 - Footer
+- Page transitions / scroll animations
+- SEO meta tags

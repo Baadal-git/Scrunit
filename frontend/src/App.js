@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import HeroSection from "./components/HeroSection";
 import HowItWorks from "./components/HowItWorks";
 import SampleReport from "./components/SampleReport";
+import Pricing from "./components/Pricing";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <HeroSection />
         <HowItWorks />
         <SampleReport />
+        <Pricing />
       </div>
     </div>
   );
