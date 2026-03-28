@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useAuth } from "../contexts/AuthContext";
 
 const MARKETS = ["Global", "United States", "India", "Europe", "Southeast Asia"];
 
@@ -12,7 +13,8 @@ const labelStyle = {
   marginBottom: "8px",
 };
 
-export default function HeroSection() {
+export default function HeroSection({ setShowAuthModal }) {
+  const { user } = useAuth();
   const [form, setForm] = useState({
     idea: "",
     targetCustomer: "",
@@ -31,6 +33,12 @@ export default function HeroSection() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Gate: must be logged in
+    if (!user) {
+      setShowAuthModal(true);
+      return;
+    }
 
     const errors = { idea: "", email: "" };
     if (!form.idea.trim()) errors.idea = "This field is required";
@@ -51,6 +59,7 @@ export default function HeroSection() {
             customer: form.targetCustomer || "",
             geography: form.market,
             email: form.email,
+            user_id: user ? user.id : null,
           }),
         }
       );

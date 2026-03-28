@@ -13,10 +13,10 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Dashboard from "./pages/Dashboard";
 import ConfirmPage from "./pages/ConfirmPage";
 
-function LandingPage() {
+function LandingPage({ setShowAuthModal }) {
   return (
     <>
-      <HeroSection />
+      <HeroSection setShowAuthModal={setShowAuthModal} />
       <HowItWorks />
       <SampleReport />
       <Pricing />
@@ -51,7 +51,7 @@ function AppContent() {
             element={
               <>
                 <Navbar setShowAuthModal={setShowAuthModal} />
-                <LandingPage />
+                <LandingPage setShowAuthModal={setShowAuthModal} />
               </>
             }
           />
