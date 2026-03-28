@@ -20,26 +20,50 @@ export default function HeroSection() {
     email: "",
   });
   const [status, setStatus] = useState("idle"); // 'idle' | 'loading' | 'success'
-  const [error, setError] = useState("");
+  const [fieldErrors, setFieldErrors] = useState({ idea: "", email: "" });
+  const [submitError, setSubmitError] = useState("");
 
   const handleChange = (field) => (e) => {
     setForm((prev) => ({ ...prev, [field]: e.target.value }));
-    if (error) setError("");
+    if (fieldErrors[field]) setFieldErrors((prev) => ({ ...prev, [field]: "" }));
+    if (submitError) setSubmitError("");
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!form.idea.trim()) {
-      setError("Please describe your startup idea.");
-      return;
-    }
-    if (!form.email.trim()) {
-      setError("Please enter your email to receive the report.");
-      return;
-    }
+
+    const errors = { idea: "", email: "" };
+    if (!form.idea.trim()) errors.idea = "This field is required";
+    if (!form.email.trim()) errors.email = "This field is required";
+    if (errors.idea || errors.email) { setFieldErrors(errors); return; }
+
     setStatus("loading");
-    // Simulate async delivery
-    setTimeout(() => setStatus("success"), 1800);
+    setSubmitError("");
+
+    try {
+      const res = await fetch(
+        "https://hook.eu1.make.com/bwsn9u3ejjcpv34psl0p7h3wtfe2j63t",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            idea: form.idea,
+            customer: form.targetCustomer || "",
+            geography: form.market,
+            email: form.email,
+          }),
+        }
+      );
+      if (res.ok) {
+        setStatus("success");
+      } else {
+        setStatus("idle");
+        setSubmitError("Something went wrong. Please try again.");
+      }
+    } catch {
+      setStatus("idle");
+      setSubmitError("Something went wrong. Please try again.");
+    }
   };
 
   return (
@@ -143,6 +167,11 @@ export default function HeroSection() {
               value={form.idea}
               onChange={handleChange("idea")}
             />
+            {fieldErrors.idea && (
+              <p data-testid="error-idea" style={{ fontFamily: "var(--font-body)", fontSize: "12px", color: "#c8622a", margin: 0, marginTop: "6px" }}>
+                {fieldErrors.idea}
+              </p>
+            )}
           </div>
 
           {/* Field 2 — Target Customer */}
@@ -197,23 +226,13 @@ export default function HeroSection() {
                 value={form.email}
                 onChange={handleChange("email")}
               />
+              {fieldErrors.email && (
+                <p data-testid="error-email" style={{ fontFamily: "var(--font-body)", fontSize: "12px", color: "#c8622a", margin: 0, marginTop: "6px" }}>
+                  {fieldErrors.email}
+                </p>
+              )}
             </div>
           </div>
-
-          {/* Error */}
-          {error && (
-            <p
-              data-testid="form-error"
-              style={{
-                fontFamily: "var(--font-body)",
-                fontSize: "13px",
-                color: "#e07050",
-                margin: 0,
-              }}
-            >
-              {error}
-            </p>
-          )}
 
           {/* Submit */}
           <button
@@ -227,12 +246,19 @@ export default function HeroSection() {
               fontSize: "15px",
               justifyContent: "center",
               marginTop: "16px",
-              opacity: status === "loading" ? 0.7 : 1,
+              opacity: status === "loading" ? 0.6 : 1,
               cursor: status === "loading" ? "not-allowed" : "pointer",
             }}
           >
             {status === "loading" ? "Launching agents..." : "Validate My Idea →"}
           </button>
+
+          {/* Submit error */}
+          {submitError && (
+            <p data-testid="submit-error" style={{ fontFamily: "var(--font-body)", fontSize: "12px", color: "#c8622a", margin: 0, textAlign: "center" }}>
+              {submitError}
+            </p>
+          )}
 
           {/* Below-button note */}
           <p
@@ -294,7 +320,7 @@ function ConfirmationCard({ email }) {
           maxWidth: "400px",
         }}
       >
-        We're scraping Reddit, Product Hunt, and Google. Your report lands in{" "}
+        We're scraping Reddit, Product Hunt, and Google. Your report is being generated and will land in{" "}
         <span style={{ color: "var(--text-primary)", fontWeight: 500 }}>{email}</span>{" "}
         within 15 minutes.
       </p>
