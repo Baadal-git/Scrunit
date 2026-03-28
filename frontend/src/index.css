@@ -194,6 +194,19 @@ body::-webkit-scrollbar {
   align-items: flex-start;
 }
 
+.about-two-col {
+  display: flex;
+  flex-direction: row;
+  gap: 48px;
+  align-items: flex-start;
+}
+
+.about-col-label {
+  width: 140px;
+  flex-shrink: 0;
+  padding-top: 4px;
+}
+
 .stat-row {
   display: flex;
   flex-direction: row;
@@ -227,6 +240,13 @@ body::-webkit-scrollbar {
 @media (max-width: 640px) {
   .about-cards {
     flex-direction: column;
+  }
+  .about-two-col {
+    flex-direction: column;
+    gap: 16px;
+  }
+  .about-col-label {
+    width: auto;
   }
   .stat-row {
     flex-direction: column;
