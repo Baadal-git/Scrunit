@@ -12,6 +12,7 @@ import AuthModal from "./components/AuthModal";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Dashboard from "./pages/Dashboard";
 import ConfirmPage from "./pages/ConfirmPage";
+import ReportViewer from "./pages/ReportViewer";
 
 function LandingPage({ setShowAuthModal }) {
   return (
@@ -64,6 +65,7 @@ function AppContent() {
             }
           />
           <Route path="/confirm" element={<ConfirmPage />} />
+          <Route path="/report/:id" element={<ReportViewer />} />
         </Routes>
       </div>
 

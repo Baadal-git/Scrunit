@@ -117,6 +117,19 @@ body::-webkit-scrollbar {
   cursor: pointer;
 }
 
+/* ── Skeleton Pulse ──────────────────────────────────────────── */
+@keyframes skeleton-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.35; }
+}
+
+/* ── Print Styles ────────────────────────────────────────────── */
+@media print {
+  nav, .top-bar, .share-btn, .export-btn { display: none !important; }
+  body { background: white !important; color: black !important; }
+  .bg-glow { display: none !important; }
+}
+
 /* ── Background Glow ─────────────────────────────────────────── */
 .bg-glow {
   position: fixed;
