@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
+import { supabase } from "../lib/supabase";
 
 const NAV_LINKS = [
   { label: "How it Works", href: "#how-it-works" },
@@ -7,8 +10,27 @@ const NAV_LINKS = [
   { label: "About", href: "#about" },
 ];
 
-export default function Navbar() {
+const mutedLink = {
+  fontFamily: "var(--font-body)",
+  fontSize: "13px",
+  color: "var(--text-muted)",
+  textDecoration: "none",
+  transition: "color 0.2s",
+  background: "none",
+  border: "none",
+  cursor: "pointer",
+  padding: 0,
+};
+
+export default function Navbar({ setShowAuthModal }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { user, loading } = useAuth();
+  const navigate = useNavigate();
+
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    navigate("/");
+  };
 
   return (
     <nav
@@ -27,8 +49,8 @@ export default function Navbar() {
         }}
       >
         {/* Logo */}
-        <a
-          href="/"
+        <Link
+          to="/"
           data-testid="navbar-logo"
           style={{
             fontFamily: "var(--font-display)",
@@ -41,33 +63,20 @@ export default function Navbar() {
           }}
         >
           Scrutin<sup style={{ fontSize: "12px", verticalAlign: "super", lineHeight: 0 }}>®</sup>
-        </a>
+        </Link>
 
         {/* Center nav links — desktop only */}
         <ul
           data-testid="navbar-links"
           className="navbar-links-desktop"
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            gap: "36px",
-            listStyle: "none",
-            margin: 0,
-            padding: 0,
-          }}
+          style={{ display: "flex", flexDirection: "row", gap: "36px", listStyle: "none", margin: 0, padding: 0 }}
         >
           {NAV_LINKS.map((link) => (
             <li key={link.label}>
               <a
                 href={link.href}
                 data-testid={`nav-link-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
-                style={{
-                  fontFamily: "var(--font-body)",
-                  fontSize: "13px",
-                  color: "var(--text-muted)",
-                  textDecoration: "none",
-                  transition: "color 0.2s",
-                }}
+                style={{ fontFamily: "var(--font-body)", fontSize: "13px", color: "var(--text-muted)", textDecoration: "none", transition: "color 0.2s" }}
                 onMouseEnter={(e) => (e.currentTarget.style.color = "var(--text-primary)")}
                 onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-muted)")}
               >
@@ -77,15 +86,54 @@ export default function Navbar() {
           ))}
         </ul>
 
-        {/* Right CTA */}
-        <a
-          href="#sample-report"
-          data-testid="navbar-cta"
-          className="btn-glass"
-          style={{ padding: "10px 22px", fontSize: "13px" }}
+        {/* Right — auth-aware, desktop only */}
+        <div
+          className="navbar-links-desktop"
+          style={{ display: "flex", alignItems: "center", gap: "12px" }}
         >
-          View Sample Report
-        </a>
+          {!loading && (
+            user ? (
+              <>
+                <Link
+                  to="/dashboard"
+                  data-testid="navbar-my-reports"
+                  style={{ ...mutedLink, fontSize: "13px" }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = "var(--text-primary)")}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-muted)")}
+                >
+                  My Reports
+                </Link>
+                <button
+                  data-testid="navbar-logout"
+                  onClick={handleSignOut}
+                  className="btn-glass"
+                  style={{ padding: "10px 22px", fontSize: "13px" }}
+                >
+                  Log Out
+                </button>
+              </>
+            ) : (
+              <>
+                <a
+                  href="#sample-report"
+                  data-testid="navbar-cta"
+                  className="btn-glass"
+                  style={{ padding: "10px 22px", fontSize: "13px" }}
+                >
+                  View Sample Report
+                </a>
+                <button
+                  data-testid="navbar-login"
+                  onClick={() => setShowAuthModal(true)}
+                  className="btn-glass"
+                  style={{ padding: "10px 22px", fontSize: "13px" }}
+                >
+                  Log In
+                </button>
+              </>
+            )
+          )}
+        </div>
 
         {/* Mobile hamburger */}
         <button
@@ -97,14 +145,7 @@ export default function Navbar() {
           {[0, 1, 2].map((i) => (
             <span
               key={i}
-              style={{
-                display: "block",
-                width: "22px",
-                height: "2px",
-                background: "var(--text-primary)",
-                borderRadius: "2px",
-                transition: "transform 0.2s, opacity 0.2s",
-              }}
+              style={{ display: "block", width: "22px", height: "2px", background: "var(--text-primary)", borderRadius: "2px", transition: "transform 0.2s, opacity 0.2s" }}
             />
           ))}
         </button>
@@ -115,13 +156,7 @@ export default function Navbar() {
         <div
           data-testid="navbar-mobile-menu"
           className="glass-card"
-          style={{
-            margin: "0 16px 16px",
-            padding: "16px",
-            display: "flex",
-            flexDirection: "column",
-            gap: "12px",
-          }}
+          style={{ margin: "0 16px 16px", padding: "16px", display: "flex", flexDirection: "column", gap: "12px" }}
         >
           {NAV_LINKS.map((link) => (
             <a
@@ -129,28 +164,47 @@ export default function Navbar() {
               href={link.href}
               data-testid={`mobile-nav-link-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
               onClick={() => setMenuOpen(false)}
-              style={{
-                fontFamily: "var(--font-body)",
-                fontSize: "14px",
-                color: "var(--text-muted)",
-                textDecoration: "none",
-                padding: "6px 0",
-                transition: "color 0.2s",
-              }}
+              style={{ fontFamily: "var(--font-body)", fontSize: "14px", color: "var(--text-muted)", textDecoration: "none", padding: "6px 0", transition: "color 0.2s" }}
               onMouseEnter={(e) => (e.currentTarget.style.color = "var(--text-primary)")}
               onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-muted)")}
             >
               {link.label}
             </a>
           ))}
-          <a
-            href="#sample-report"
-            className="btn-glass"
-            onClick={() => setMenuOpen(false)}
-            style={{ padding: "10px 22px", fontSize: "13px", marginTop: "4px" }}
-          >
-            View Sample Report
-          </a>
+
+          {!loading && (
+            user ? (
+              <>
+                <Link
+                  to="/dashboard"
+                  onClick={() => setMenuOpen(false)}
+                  style={{ fontFamily: "var(--font-body)", fontSize: "14px", color: "var(--text-muted)", textDecoration: "none", padding: "6px 0" }}
+                >
+                  My Reports
+                </Link>
+                <button
+                  onClick={() => { handleSignOut(); setMenuOpen(false); }}
+                  className="btn-glass"
+                  style={{ padding: "10px 22px", fontSize: "13px", marginTop: "4px" }}
+                >
+                  Log Out
+                </button>
+              </>
+            ) : (
+              <>
+                <a href="#sample-report" className="btn-glass" onClick={() => setMenuOpen(false)} style={{ padding: "10px 22px", fontSize: "13px", marginTop: "4px" }}>
+                  View Sample Report
+                </a>
+                <button
+                  onClick={() => { setShowAuthModal(true); setMenuOpen(false); }}
+                  className="btn-glass"
+                  style={{ padding: "10px 22px", fontSize: "13px" }}
+                >
+                  Log In
+                </button>
+              </>
+            )
+          )}
         </div>
       )}
 
