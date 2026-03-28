@@ -11,6 +11,7 @@ import About from "./components/About";
 import AuthModal from "./components/AuthModal";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Dashboard from "./pages/Dashboard";
+import ConfirmPage from "./pages/ConfirmPage";
 
 function LandingPage() {
   return (
@@ -62,6 +63,7 @@ function AppContent() {
               </ProtectedRoute>
             }
           />
+          <Route path="/confirm" element={<ConfirmPage />} />
         </Routes>
       </div>
 
