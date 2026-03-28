@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 
 const MARKETS = ["Global", "United States", "India", "Europe", "Southeast Asia"];
@@ -287,7 +288,8 @@ export default function HeroSection({ setShowAuthModal }) {
   );
 }
 
-function ConfirmationCard({ email }) {
+function ConfirmationCard() {
+  const navigate = useNavigate();
   return (
     <div
       data-testid="confirmation-card"
@@ -329,10 +331,16 @@ function ConfirmationCard({ email }) {
           maxWidth: "400px",
         }}
       >
-        We're scraping Reddit, Product Hunt, and Google. Your report is being generated and will land in{" "}
-        <span style={{ color: "var(--text-primary)", fontWeight: 500 }}>{email}</span>{" "}
-        within 15 minutes.
+        We're scraping Reddit, Google, and competitor data right now. Your report will appear in My Reports within 15 minutes. You can close this and check back shortly.
       </p>
+      <button
+        data-testid="go-to-dashboard-btn"
+        className="btn-primary"
+        onClick={() => navigate("/dashboard")}
+        style={{ padding: "12px 28px", fontSize: "14px", marginTop: "8px" }}
+      >
+        Go to My Reports →
+      </button>
     </div>
   );
 }
