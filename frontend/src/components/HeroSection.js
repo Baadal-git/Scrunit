@@ -105,7 +105,7 @@ export default function HeroSection({ setShowAuthModal }) {
         }}
       >
         <span style={{ color: "var(--accent-orange)", fontSize: "10px" }}>●</span>
-        {" "}AI-powered · Multi-agent research · 10 min delivery
+        {" "}AI-powered · Multi-agent research · 15 min delivery
       </div>
 
       {/* 2. H1 Headline */}
