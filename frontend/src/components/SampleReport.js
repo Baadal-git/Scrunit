@@ -113,7 +113,7 @@ export default function SampleReport() {
       data-testid="sample-report-section"
       id="sample-report"
       style={{
-        paddingTop: "100px",
+        paddingTop: "48px",
         paddingBottom: "100px",
         paddingLeft: "24px",
         paddingRight: "24px",
