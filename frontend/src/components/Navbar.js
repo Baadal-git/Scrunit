@@ -31,11 +31,11 @@ export default function Navbar() {
           href="/"
           data-testid="navbar-logo"
           style={{
-            fontFamily: "var(--font-heading)",
+            fontFamily: "var(--font-display)",
             fontSize: "26px",
             color: "var(--text-primary)",
             letterSpacing: "-0.5px",
-            fontWeight: 700,
+            fontWeight: "normal",
             textDecoration: "none",
             lineHeight: 1,
           }}
