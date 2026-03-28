@@ -29,7 +29,7 @@ export default function HowItWorks() {
       data-testid="how-it-works-section"
       id="how-it-works"
       style={{
-        paddingTop: "100px",
+        paddingTop: "48px",
         paddingBottom: "100px",
         paddingLeft: "24px",
         paddingRight: "24px",
