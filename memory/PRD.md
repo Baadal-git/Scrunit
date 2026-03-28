@@ -42,10 +42,17 @@ Build the Scrutin brand (startup idea validation SaaS) using React + CRA + JavaS
 - Sources callout: "Sources we scrape:" label + 6 pills (Reddit, Product Hunt, Google, G2, Trustpilot, + many more)
 - Added `.steps-row`, `.step-card`, `.step-connector` CSS classes to index.css
 
+## Phase 4 — Implemented (2026-03-28)
+### SampleReport Component (`src/components/SampleReport.js`)
+- Eyebrow "SAMPLE REPORT" → H2 "What you'll receive." (Instrument Serif) → subtext
+- **Card 1 — Competitive Landscape**: 3 competitor rows with funding badges (orange pill), taglines, "What customers hate:" red pills + italic complaints, competitive gap callout box (orange-tinted), bottom gradient overlay + 🔒 lock text
+- **Card 2 — The Verdict**: 5-item score grid (3 cols desktop, 2 cols mobile) with Instrument Serif scores, "STRONG GO" verdict badge (orange bg), bottom overlay
+- CTA row: "Validate My Idea Free →" button scrolls to hero form via `querySelector`
+- Added `.score-grid` CSS class (responsive 3→2 cols) and `html { scroll-behavior: smooth }` to index.css
+
 ## Prioritized Backlog
 
 ### P0 — Core Pages
-- Sample Report page (mock data)
 - Pricing section
 
 ### P1 — Features

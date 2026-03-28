@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+
 /* ── Scrutin Design Tokens ─────────────────────────────────── */
 :root {
   --bg-primary: #120f0a;
@@ -168,6 +172,19 @@ body::-webkit-scrollbar {
   }
   .step-connector {
     display: none;
+  }
+}
+
+/* ── Score Grid ──────────────────────────────────────────────── */
+.score-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+@media (max-width: 600px) {
+  .score-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 

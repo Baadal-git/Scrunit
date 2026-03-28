@@ -2,6 +2,7 @@ import "@/App.css";
 import Navbar from "./components/Navbar";
 import HeroSection from "./components/HeroSection";
 import HowItWorks from "./components/HowItWorks";
+import SampleReport from "./components/SampleReport";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Navbar />
         <HeroSection />
         <HowItWorks />
+        <SampleReport />
       </div>
     </div>
   );
