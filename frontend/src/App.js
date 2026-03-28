@@ -4,6 +4,7 @@ import HeroSection from "./components/HeroSection";
 import HowItWorks from "./components/HowItWorks";
 import SampleReport from "./components/SampleReport";
 import Pricing from "./components/Pricing";
+import About from "./components/About";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <HowItWorks />
         <SampleReport />
         <Pricing />
+        <About />
       </div>
     </div>
   );

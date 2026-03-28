@@ -175,6 +175,73 @@ body::-webkit-scrollbar {
   }
 }
 
+/* ── About / Marquee ─────────────────────────────────────────── */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-33.33%); }
+}
+
+.marquee-track {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: marquee 30s linear infinite;
+}
+
+.about-cards {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.stat-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 56px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  margin: 72px 0;
+}
+
+.stat-item {
+  flex: 1;
+  text-align: center;
+}
+
+.stat-divider {
+  width: 1px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.08);
+  flex-shrink: 0;
+}
+
+.footer-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+@media (max-width: 640px) {
+  .about-cards {
+    flex-direction: column;
+  }
+  .stat-row {
+    flex-direction: column;
+    gap: 36px;
+  }
+  .stat-divider {
+    display: none;
+  }
+  .footer-row {
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+  }
+}
+
 /* ── Pricing ─────────────────────────────────────────────────── */
 .pricing-row {
   display: flex;

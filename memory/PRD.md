@@ -50,13 +50,15 @@ Build the Scrutin brand (startup idea validation SaaS) using React + CRA + JavaS
 - CTA row: "Validate My Idea Free →" button scrolls to hero form via `querySelector`
 - Added `.score-grid` CSS class (responsive 3→2 cols) and `html { scroll-behavior: smooth }` to index.css
 
-## Phase 5 — Implemented (2026-03-28)
-### Pricing Component (`src/components/Pricing.js`)
-- Eyebrow "PRICING" → H2 "Simple, honest pricing." → Inter subtext
-- **Free card** (.glass-card): ₹0, 5 features with `→` prefix, "Get My Free Report" .btn-glass CTA
-- **Pro card** (orange-tinted border): ₹999/month, "MOST POPULAR" absolute badge, 5 features, "Start Pro" .btn-primary CTA
-- Both CTAs scroll to hero form; note below cards
-- Added `.pricing-row` / `.pricing-card` responsive CSS (stacks on mobile <640px)
+## Phase 6 — Implemented (2026-03-28)
+### About Component (`src/components/About.js`)
+- **Part 1**: Large Instrument Serif pull quote — "Most ideas don't fail at launch. *They fail before it.*" (orange), offset Inter paragraph below
+- **Part 2**: Infinite CSS marquee strip (30s, full-width, 3 repetitions for seamless loop) with `@keyframes marquee`
+- **Part 3**: Three asymmetric editorial cards (01 The Problem / 02 What We Do with orange left-border accent / 03 What You Get) — large ghost numbers at 6% opacity, stacks on mobile
+- **Part 4**: Stat row (10 · 15 MIN · 4+ · 100%) with Instrument Serif display numbers, Inter labels, vertical dividers hidden on mobile — full-width border-top/bottom strip
+- **Part 5**: Closing line + "Validate My Idea Free →" .btn-primary scrolls to hero form
+- **Footer**: `#0d0b08` bg, Scrutin® logo, copyright, Privacy + Terms hover links — responsive centered on mobile
+- Added CSS classes: `.marquee-track`, `.about-cards`, `.stat-row`, `.stat-item`, `.stat-divider`, `.footer-row`
 
 ## Prioritized Backlog
 
@@ -65,6 +67,5 @@ Build the Scrutin brand (startup idea validation SaaS) using React + CRA + JavaS
 - Email delivery integration (SendGrid / Resend)
 
 ### P1 — Polish
-- Footer
 - Page transitions / scroll animations
 - SEO meta tags
