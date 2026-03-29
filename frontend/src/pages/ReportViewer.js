@@ -231,9 +231,9 @@ export default function ReportViewer() {
 
       // 3. Clean up escaped characters
       content = content
-        .replace(/\\n/g, '\n')           // turn \n into real line breaks
-        .replace(/\\"/g, '"')            // fix escaped quotes
-        .replace(/^"|"$/g, '')           // remove any outer quotes
+        .replace(/\\n/g, '\n')
+        .replace(/\\"/g, '"')
+        .replace(/^"|"$/g, '')
         .trim();
 
       return content;
