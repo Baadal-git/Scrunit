@@ -205,39 +205,33 @@ export default function ReportViewer() {
 
         <hr style={{ border: "none", borderTop: "1px solid rgba(255,255,255,0.08)", marginBottom: "48px" }} />
 
-        {/* Markdown content */}
-<div data-testid="report-content">
-  <ReactMarkdown components={mdComponents}>
-    {(() => {
-      let content = report.report_content || '';
-
-      // 1. Try to parse as JSON and extract .text (this is the most common case from Claude + Make.com)
-      try {
-        const parsed = JSON.parse(content);
-        if (parsed && typeof parsed === 'object' && parsed.text) {
-          content = parsed.text;
-        }
-      } catch (e) {
-        // Not valid JSON → keep original and try regex fallback
-      }
-
-      // 2. Fallback regex: extract everything inside the "text":"..." field if JSON.parse failed
-      if (content.includes('"text":')) {
-        const match = content.match(/"text":"([\s\S]*?)"\s*\}\s*$/);
-        if (match && match[1]) {
-          content = match[1];
-        }
-      }
-
-      // 3. Clean up escaped characters
-      content = content
-        .replace(/\\n/g, '\n')
-        .replace(/\\"/g, '"')
-        .replace(/^"|"$/g, '')
-        .trim();
-
-      return content;
-    })()}
-  </ReactMarkdown>
-</div>
+       {/* Markdown content */}
+        <div data-testid="report-content">
+          <ReactMarkdown components={mdComponents}>
+            {(() => {
+              let content = report.report_content || '';
+              try {
+                const parsed = JSON.parse(content);
+                if (parsed && typeof parsed === 'object' && parsed.text) {
+                  content = parsed.text;
+                }
+              } catch (e) {}
+              if (content.includes('"text":')) {
+                const match = content.match(/"text":"([\s\S]*?)"\s*\}\s*$/);
+                if (match && match[1]) {
+                  content = match[1];
+                }
+              }
+              content = content
+                .replace(/\\n/g, '\n')
+                .replace(/\\"/g, '"')
+                .replace(/^"|"$/g, '')
+                .trim();
+              return content;
+            })()}
+          </ReactMarkdown>
+        </div>
+      </div>
+    </div>
+  );
 }
