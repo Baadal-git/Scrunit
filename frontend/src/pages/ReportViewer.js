@@ -223,7 +223,7 @@ export default function ReportViewer() {
 
       // 2. Fallback regex: extract everything inside the "text":"..." field if JSON.parse failed
       if (content.includes('"text":')) {
-        const match = content.match(/"text"\s*:\s*"([\s\S]*?)"\s*\}$/);
+        const match = content.match(/"text":"([\s\S]*?)"\s*\}\s*$/);
         if (match && match[1]) {
           content = match[1];
         }
