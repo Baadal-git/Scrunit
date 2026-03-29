@@ -206,24 +206,35 @@ export default function ReportViewer() {
         <hr style={{ border: "none", borderTop: "1px solid rgba(255,255,255,0.08)", marginBottom: "48px" }} />
 
         {/* Markdown content */}
-        <div data-testid="report-content">
-          <ReactMarkdown components={mdComponents}>
-            {(() => {
-  let content = report.report_content;
-  try {
-    const parsed = JSON.parse(content);
-    if (parsed.text) content = parsed.text;
-  } catch {
-    if (content.startsWith('{"type"')) {
-      const match = content.match(/"text":"([\s\S]*)"\}?\s*$/);
-      if (match) content = match[1].replace(/\\n/g, '\n').replace(/\\"/g, '"');
-    }
-  }
-  return content;
-})()}
-          </ReactMarkdown>
-        </div>
-      </div>
-    </div>
-  );
+<div data-testid="report-content">
+  <ReactMarkdown components={mdComponents}>
+    {(() => {
+      let content = report.report_content || '';
+
+      // 1. If it's a stringified JSON object from Claude → extract the real text
+      try {
+        const parsed = JSON.parse(content);
+        if (parsed && typeof parsed === 'object' && parsed.text) {
+          content = parsed.text;
+        }
+      } catch (e) {
+        // Not valid JSON → keep original
+      }
+
+      // 2. Fix escaped newlines and quotes (common when saved from Make.com)
+      content = content
+        .replace(/\\n/g, '\n')
+        .replace(/\\"/g, '"')
+        .replace(/^"|"$/g, '');
+
+      // 3. Remove leftover {"type":"text",...} wrapper if still present
+      if (content.startsWith('{') && content.includes('"text":')) {
+        const match = content.match(/"text"\s*:\s*"([\s\S]*?)"\s*}$/);
+        if (match && match[1]) content = match[1];
+      }
+
+      return content.trim();
+    })()}
+  </ReactMarkdown>
+</div>
 }
