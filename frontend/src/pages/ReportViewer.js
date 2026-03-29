@@ -208,7 +208,14 @@ export default function ReportViewer() {
         {/* Markdown content */}
         <div data-testid="report-content">
           <ReactMarkdown components={mdComponents}>
-            {report.report_content}
+            {(() => {
+  try {
+    const parsed = JSON.parse(report.report_content);
+    return parsed.text || report.report_content;
+  } catch {
+    return report.report_content;
+  }
+})()}
           </ReactMarkdown>
         </div>
       </div>
