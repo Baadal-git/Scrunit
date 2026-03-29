@@ -1,19 +1,17 @@
 import React from "react";
 
 const FREE_FEATURES = [
-  "1 validation report",
-  "Market sizing + competitor analysis",
-  "10-section founder report",
-  "Delivered to your inbox in 15 minutes",
+  "1 free validation report",
+  "Sections 1–5: Market sizing, competitor analysis, customer profile, pain point audit & business model fit",
+  "Delivered in under 15 minutes",
   "No credit card required",
 ];
 
 const PRO_FEATURES = [
-  "Unlimited validation reports",
-  "Ad intelligence — competitor ad analysis",
-  "Reverse-engineered ad angles for your idea",
-  "Priority report delivery (under 10 minutes)",
-  "Early access to new features",
+  "Everything in Free",
+  "Sections 6–10: Go-to-market strategy, risk analysis, monetisation paths, ad angle intelligence & 18-month forecast",
+  "Full founder-grade report — all 10 sections",
+  "One report, one payment — no subscription",
 ];
 
 const scrollToForm = () => {
@@ -73,7 +71,7 @@ export default function Pricing() {
               margin: 0,
             }}
           >
-            Start free. Upgrade when you're ready.
+            Start free. Pay only when you want the full picture.
           </p>
         </div>
 
@@ -110,7 +108,7 @@ export default function Pricing() {
                 lineHeight: 1,
               }}
             >
-              ₹0
+              $0
             </p>
             <p
               style={{
@@ -122,7 +120,7 @@ export default function Pricing() {
                 marginBottom: "28px",
               }}
             >
-              to get started
+              sections 1–5 of your report
             </p>
 
             <hr
@@ -167,7 +165,7 @@ export default function Pricing() {
             </button>
           </div>
 
-          {/* ── Card 2: Pro ── */}
+          {/* ── Card 2: Full Report ── */}
           <div
             data-testid="pricing-card-pro"
             className="pricing-card"
@@ -179,7 +177,7 @@ export default function Pricing() {
               position: "relative",
             }}
           >
-            {/* Most Popular badge */}
+            {/* Badge */}
             <div
               style={{
                 position: "absolute",
@@ -198,7 +196,7 @@ export default function Pricing() {
                 whiteSpace: "nowrap",
               }}
             >
-              Most Popular
+              Full Report
             </div>
 
             <p
@@ -212,7 +210,7 @@ export default function Pricing() {
                 marginBottom: "12px",
               }}
             >
-              Pro
+              One-Time
             </p>
 
             <p
@@ -225,7 +223,7 @@ export default function Pricing() {
                 lineHeight: 1,
               }}
             >
-              ₹999
+              $9.99
             </p>
             <p
               style={{
@@ -237,7 +235,7 @@ export default function Pricing() {
                 marginBottom: "28px",
               }}
             >
-              per month
+              per report · no subscription
             </p>
 
             <hr
@@ -278,7 +276,7 @@ export default function Pricing() {
                 boxSizing: "border-box",
               }}
             >
-              Start Pro
+              Unlock Full Report
             </button>
           </div>
 
@@ -296,7 +294,7 @@ export default function Pricing() {
             marginBottom: 0,
           }}
         >
-          All prices in INR. Cancel anytime. Reports are non-refundable once generated.
+          Priced in USD. One payment per report. No subscription, no surprises.
         </p>
 
       </div>
