@@ -211,29 +211,32 @@ export default function ReportViewer() {
     {(() => {
       let content = report.report_content || '';
 
-      // 1. If it's a stringified JSON object from Claude → extract the real text
+      // 1. Try to parse as JSON and extract .text (this is the most common case from Claude + Make.com)
       try {
         const parsed = JSON.parse(content);
         if (parsed && typeof parsed === 'object' && parsed.text) {
           content = parsed.text;
         }
       } catch (e) {
-        // Not valid JSON → keep original
+        // Not valid JSON → keep original and try regex fallback
       }
 
-      // 2. Fix escaped newlines and quotes (common when saved from Make.com)
+      // 2. Fallback regex: extract everything inside the "text":"..." field if JSON.parse failed
+      if (content.includes('"text":')) {
+        const match = content.match(/"text"\s*:\s*"([\s\S]*?)"\s*\}$/);
+        if (match && match[1]) {
+          content = match[1];
+        }
+      }
+
+      // 3. Clean up escaped characters
       content = content
-        .replace(/\\n/g, '\n')
-        .replace(/\\"/g, '"')
-        .replace(/^"|"$/g, '');
+        .replace(/\\n/g, '\n')           // turn \n into real line breaks
+        .replace(/\\"/g, '"')            // fix escaped quotes
+        .replace(/^"|"$/g, '')           // remove any outer quotes
+        .trim();
 
-      // 3. Remove leftover {"type":"text",...} wrapper if still present
-      if (content.startsWith('{') && content.includes('"text":')) {
-        const match = content.match(/"text"\s*:\s*"([\s\S]*?)"\s*}$/);
-        if (match && match[1]) content = match[1];
-      }
-
-      return content.trim();
+      return content;
     })()}
   </ReactMarkdown>
 </div>
