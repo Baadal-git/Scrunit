@@ -209,12 +209,17 @@ export default function ReportViewer() {
         <div data-testid="report-content">
           <ReactMarkdown components={mdComponents}>
             {(() => {
+  let content = report.report_content;
   try {
-    const parsed = JSON.parse(report.report_content);
-    return parsed.text || report.report_content;
+    const parsed = JSON.parse(content);
+    if (parsed.text) content = parsed.text;
   } catch {
-    return report.report_content;
+    if (content.startsWith('{"type"')) {
+      const match = content.match(/"text":"([\s\S]*)"\}?\s*$/);
+      if (match) content = match[1].replace(/\\n/g, '\n').replace(/\\"/g, '"');
+    }
   }
+  return content;
 })()}
           </ReactMarkdown>
         </div>
