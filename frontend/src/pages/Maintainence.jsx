@@ -101,14 +101,14 @@ const styles = `
     font-family: 'IBM Plex Mono', monospace;
     font-size: 11px;
     font-weight: 300;
-    color: #4a4745;
+    color: #6b6866;;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     padding-right: 4rem;
   }
 
   .scrutin-dot {
-    color: #2e2c2a;
+    color: #4a4745;
     margin: 0 0.7em;
   }
 
