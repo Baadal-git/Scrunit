@@ -13,7 +13,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Dashboard from "./pages/Dashboard";
 import ConfirmPage from "./pages/ConfirmPage";
 import ReportViewer from "./pages/ReportViewer";
-import Maintenance from "./pages/Maintainence";
+import Maintainence from "./pages/Maintainence";
 
 
 function LandingPage({ setShowAuthModal }) {
