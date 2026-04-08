@@ -13,6 +13,8 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Dashboard from "./pages/Dashboard";
 import ConfirmPage from "./pages/ConfirmPage";
 import ReportViewer from "./pages/ReportViewer";
+import Maintenance from "./pages/Maintenance";
+
 
 function LandingPage({ setShowAuthModal }) {
   return (
@@ -46,7 +48,7 @@ function AppContent() {
       </div>
 
       <div style={{ position: "relative", zIndex: 1 }}>
-        <Routes>
+          </*Routes>
           <Route
             path="/"
             element={
@@ -66,7 +68,11 @@ function AppContent() {
           />
           <Route path="/confirm" element={<ConfirmPage />} />
           <Route path="/report/:id" element={<ReportViewer />} />
-        </Routes>
+        </Routes*/>
+
+          <Routes>
+            <Route path="*" element={<Maintainence />} />
+          </Routes>
       </div>
 
       {showAuthModal && <AuthModal onClose={() => setShowAuthModal(false)} />}
